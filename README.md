@@ -21,16 +21,16 @@ A modern web application for researching topics using AI-powered web search. Bui
 
 ![Research Agent Prompt](assets/Prompt.png)
 
+## Live Demo
+
+- 🌐 **Frontend:** https://research-agent.oscar-monterde-camacho-marketing.workers.dev
+- ⚙️ **Backend API:** https://research-agent-production-2233.up.railway.app
+
 ### Infrastructure
 
 ![Frontend on Cloudflare](assets/FrontEnd%20Cloudfare.png)
 
 ![Backend on Railway](assets/Backend%20Railway.png)
-
-## Live Demo
-
-- 🌐 **Frontend:** https://research-agent.oscar-monterde-camacho-marketing.workers.dev
-- ⚙️ **Backend API:** https://research-agent-production-2233.up.railway.app
 
 > Frontend hosted on Cloudflare Workers — Backend hosted on Railway
 
