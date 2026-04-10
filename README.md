@@ -21,6 +21,12 @@ A modern web application for researching topics using AI-powered web search. Bui
 
 ![Research Agent Prompt](assets/Prompt.png)
 
+### Infrastructure
+
+![Frontend on Cloudflare](assets/FrontEnd%20Cloudfare.png)
+
+![Backend on Railway](assets/Backend%20Railway.png)
+
 ## Live Demo
 
 - 🌐 **Frontend:** https://research-agent.oscar-monterde-camacho-marketing.workers.dev
