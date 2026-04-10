@@ -1,3 +1,15 @@
+# Research Agent
+
+A modern web application for researching topics using AI-powered web search. Built with Python FastAPI backend and React + Vite frontend.
+
+## Features
+
+- 🔍 **AI-Powered Research** — Uses Claude Sonnet 4 with web search to research any topic
+- 🚀 **Real-time Streaming** — Results stream as they're gathered, ChatGPT-style
+- 📝 **Markdown Rendering** — Structured output with proper headings, bold text and lists
+- 💡 **Topic Suggestions** — One-click suggested topics to get started instantly
+- 🕐 **Search History** — Revisit your last 10 searches with a single click
+- 🎨 **Modern UI** — Clean, responsive interface built with React and Vite
 
 ## Preview
 
@@ -24,12 +36,9 @@ cd research-agent
 
 ```bash
 cd backend
-
 python3 -m venv venv
-source venv/bin/activate        # Windows: venv\Scripts\activate
-
+source venv/bin/activate
 pip install -r requirements.txt
-
 echo "ANTHROPIC_API_KEY=your-key-here" > .env
 ```
 
@@ -68,8 +77,6 @@ Frontend runs at `http://localhost:5173`
 
 ### `POST /api/research`
 
-Streams research results for a given topic using Server-Sent Events.
-
 **Request:**
 ```json
 { "topic": "computer vision in sports" }
@@ -86,17 +93,6 @@ Streams research results for a given topic using Server-Sent Events.
 ```json
 { "status": "ok" }
 ```
-
-## Building for Production
-
-**Frontend:**
-```bash
-cd frontend
-npm run build
-# Output in frontend/dist/
-```
-
-**Backend:** Deploy the `backend/` folder in any Python environment with dependencies installed.
 
 ## Roadmap
 
