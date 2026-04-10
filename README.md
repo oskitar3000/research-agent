@@ -1,3 +1,10 @@
+
+## Preview
+
+![Research Agent UI](assets/UI%20FrontEnd.png)
+
+![Research Agent Prompt](assets/Prompt.png)
+
 ## Prerequisites
 
 - Python 3.9+
