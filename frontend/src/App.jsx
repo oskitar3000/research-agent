@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import ReactMarkdown from 'react-markdown';
 import './App.css';
 
 function App() {
@@ -6,15 +7,36 @@ function App() {
   const [response, setResponse] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [history, setHistory] = useState([]);
 
-  const handleResearch = async (e) => {
-    e.preventDefault();
-    
-    if (!topic.trim()) {
+  const suggestions = [
+    'Latest AI trends 2026',
+    'Computer vision in sports',
+    'Cloud architecture best practices',
+    'Python AI frameworks',
+  ];
+
+  const addToHistory = (searchTopic) => {
+    const normalized = searchTopic.trim();
+    if (!normalized) return;
+
+    setHistory((prevHistory) => {
+      const nextHistory = [
+        normalized,
+        ...prevHistory.filter((item) => item.toLowerCase() !== normalized.toLowerCase()),
+      ];
+      return nextHistory.slice(0, 10);
+    });
+  };
+
+  const performResearch = async (searchTopic) => {
+    const normalizedTopic = searchTopic.trim();
+    if (!normalizedTopic) {
       setError('Please enter a topic');
       return;
     }
 
+    setTopic(normalizedTopic);
     setLoading(true);
     setError('');
     setResponse('');
@@ -25,7 +47,7 @@ function App() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ topic }),
+        body: JSON.stringify({ topic: normalizedTopic }),
       });
 
       if (!response.ok) {
@@ -63,11 +85,23 @@ function App() {
           }
         }
       }
+
+      addToHistory(normalizedTopic);
     } catch (err) {
       setError(err.message || 'An error occurred while researching');
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleResearch = async (e) => {
+    e.preventDefault();
+    await performResearch(topic);
+  };
+
+  const handleHistoryClick = async (searchTopic) => {
+    if (loading) return;
+    await performResearch(searchTopic);
   };
 
   return (
@@ -98,6 +132,43 @@ function App() {
           </div>
         </form>
 
+        {!topic.trim() && !loading && (
+          <div className="suggestions-container">
+            <h3>Suggested Topics</h3>
+            <div className="suggestion-buttons">
+              {suggestions.map((suggestion) => (
+                <button
+                  key={suggestion}
+                  type="button"
+                  className="suggestion-button"
+                  onClick={() => performResearch(suggestion)}
+                >
+                  {suggestion}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {history.length > 0 && (
+          <div className="history-container">
+            <h3>Recent Searches</h3>
+            <div className="history-chips">
+              {history.map((item) => (
+                <button
+                  key={item}
+                  type="button"
+                  className="history-chip"
+                  onClick={() => handleHistoryClick(item)}
+                  disabled={loading}
+                >
+                  {item}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+
         {error && (
           <div className="error-message">
             <strong>Error:</strong> {error}
@@ -116,9 +187,7 @@ function App() {
             <div className="response-content">
               <h2>Research Results</h2>
               <div className="response-text">
-                {response.split('\n').map((paragraph, index) => 
-                  paragraph.trim() && <p key={index}>{paragraph}</p>
-                )}
+                <ReactMarkdown>{response}</ReactMarkdown>
               </div>
             </div>
           </div>
