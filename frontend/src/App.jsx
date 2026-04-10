@@ -42,7 +42,7 @@ function App() {
     setResponse('');
 
     try {
-      const response = await fetch('/api/research', {
+      const response = await fetch('https://research-agent-production-2233.up.railway.app/api/research', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
