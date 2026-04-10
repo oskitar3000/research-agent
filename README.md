@@ -15,6 +15,10 @@ A modern web application for researching topics using AI-powered web search. Bui
 
 ![Research Agent UI](assets/UI%20FrontEnd.png)
 
+![Research Agent Loading](assets/UI%20FrontEnt%20Loading%20Search.png)
+
+![Research Agent Results](assets/UI%20FrontEnt%20Search%20Finished.png)
+
 ![Research Agent Prompt](assets/Prompt.png)
 
 ## Prerequisites
